@@ -4,9 +4,19 @@ Public showcase of a security-first identity foundation designed for a high-traf
 
 ## Current milestone
 
-The architecture and security contracts are approved, and staging preparation is authorized. This milestone remains design-only: it does not claim a migration, staging deployment, or production change.
+Version 0.2.0 marks the first privately reviewed implementation foundation. The approved architecture now has a testable, versioned codebase, while runtime activation remains deliberately disabled.
 
-## What the design improves
+No database schema has been applied, no customer data has been processed, and no staging or Production behavior has changed.
+
+## What this milestone delivers
+
+- A centralized contract for verified customer identity
+- Consistent mobile input validation and safe navigation handling
+- Explicit fail-closed boundaries for future integrations
+- Repeatable packaging, quality checks, and privacy safeguards
+- Clear approval gates before migration, pilot, or deployment
+
+## What the architecture improves
 
 - Centralized verified-mobile identity instead of independent trust rules across customer surfaces
 - Transaction-safe OTP lifecycle with replay protection, atomic limits, device binding, and privacy-safe observability
@@ -31,23 +41,27 @@ flowchart LR
     Admin[Least-privilege CRM roles] --> Audit[Privacy-safe audit trail]
 ```
 
-## Engineering safeguards
+## Verified foundation safeguards
 
-- Strict mobile normalization accepts localized digits but rejects malformed or overlong input.
-- Sensitive lookup values use keyed hashes; recoverable mobile data uses authenticated encryption with external, environment-specific keys.
-- Four-dimensional abuse controls cover challenge, mobile, device, and network scopes without race-prone cache counters.
-- Key rotation, request idempotency, concurrent registration, session revocation, and failure recovery are explicit parts of the contract.
-- Security tests cover enumeration, CSRF, IDOR, replay, XSS, SQL injection, session fixation, CORS, cache leakage, and concurrency.
-- Performance acceptance protects checkout and customer-panel latency and avoids new work in product loops.
+- Localized mobile input is normalized consistently and malformed values are rejected safely.
+- Navigation targets are constrained to the trusted site boundary.
+- The private foundation remains unavailable if its reviewed runtime boundary cannot be verified.
+- Repeatable checks cover compatibility, packaging integrity, dependency health, and accidental private-data disclosure.
+- The distributable foundation is separated from development and verification tooling.
+
+## Approved delivery safeguards
+
+The approved architecture requires encrypted identity storage, abuse controls, request idempotency, concurrency safety, session revocation, privacy-safe observability, secure recovery, and performance protection before runtime activation. Those operational controls remain subject to separate migration, staging, pilot, and Production approvals.
 
 ## Delivery status
 
 | Stage | Status |
 |---|---|
 | Read-only audit | Complete |
-| Architecture, schema, API, sequences, risks | Complete |
-| Isolated staging and restore verification | Preparation approved; environment prerequisites pending |
-| Migration, shadow, internal, and pilot validation | Pending separate approvals |
-| Limited and active production | Not started |
+| Architecture and security contracts | Complete |
+| Private implementation foundation | Complete; deliberately non-operational |
+| Isolated staging preparation | Approved; no deployment performed |
+| Migration and pilot validation | Pending separate approvals |
+| Production | Not started |
 
-The private implementation repository contains the detailed contracts and review history. Credentials, customer data, infrastructure details, exploit reproduction steps, and production source are intentionally excluded here.
+The private repository contains the reviewed implementation and verification history. Production source, credentials, customer data, infrastructure identifiers, and sensitive security details are intentionally excluded from this showcase.
