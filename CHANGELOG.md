@@ -1,5 +1,12 @@
 # Changelog
 
+## [Unreleased]
+
+### Changed
+
+- Recorded approval for staging preparation while keeping migration, deployment, shadow, pilot, and production gates closed.
+- Kept environment-specific infrastructure identifiers out of the approved implementation contract.
+
 ## [0.1.0] - 2026-07-14
 
 ### Added
