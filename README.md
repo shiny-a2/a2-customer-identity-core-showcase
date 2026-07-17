@@ -4,7 +4,7 @@ Public showcase of a security-first identity foundation designed for a high-traf
 
 ## Current milestone
 
-The architecture and security contracts are complete and under private review. This milestone is design-only: it does not claim a staging or production deployment.
+The architecture and security contracts are approved, and staging preparation is authorized. This milestone remains design-only: it does not claim a migration, staging deployment, or production change.
 
 ## What the design improves
 
@@ -46,7 +46,7 @@ flowchart LR
 |---|---|
 | Read-only audit | Complete |
 | Architecture, schema, API, sequences, risks | Complete |
-| Isolated staging and restore verification | Pending explicit approval |
+| Isolated staging and restore verification | Preparation approved; environment prerequisites pending |
 | Migration, shadow, internal, and pilot validation | Pending separate approvals |
 | Limited and active production | Not started |
 
