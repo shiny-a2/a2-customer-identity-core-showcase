@@ -2,10 +2,26 @@
 
 ## [Unreleased]
 
+No changes yet.
+
+## [0.2.0] - 2026-07-17
+
+### Added
+
+- Released the first privately reviewed implementation foundation for centralized customer identity.
+- Added testable validation, fail-closed service boundaries, repeatable packaging, and automated quality and privacy checks.
+- Documented the remaining approval gates for migration, pilot validation, and deployment.
+
 ### Changed
 
-- Recorded approval for staging preparation while keeping migration, deployment, shadow, pilot, and production gates closed.
-- Kept environment-specific infrastructure identifiers out of the approved implementation contract.
+- Advanced the public milestone from architecture-only to an implemented but deliberately non-operational foundation.
+
+### Safety note
+
+- No database schema was applied.
+- No customer data was processed.
+- No staging deployment or Production behavior changed.
+- This showcase contains no production source, credentials, customer information, infrastructure identifiers, or sensitive implementation details.
 
 ## [0.1.0] - 2026-07-14
 
