@@ -1,0 +1,35 @@
+name: Public showcase safety
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out complete history
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Check Python syntax
+        run: python3 -m py_compile scripts/*.py tests/test_*.py
+
+      - name: Run safety tests
+        run: python3 -m unittest discover -s tests -p "test_*.py"
+
+      - name: Scan current files and history
+        run: python3 scripts/check_public_safety.py --history
+
+      - name: Check whitespace integrity
+        run: git diff --check
