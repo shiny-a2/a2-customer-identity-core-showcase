@@ -65,3 +65,10 @@ The approved architecture requires encrypted identity storage, abuse controls, r
 | Production | Not started |
 
 The private repository contains the reviewed implementation and verification history. Production source, credentials, customer data, infrastructure identifiers, and sensitive security details are intentionally excluded from this showcase.
+
+## Related Portfolio
+
+- Portfolio: https://amiraliyaghouti.com
+- Projects: https://amiraliyaghouti.com/projects.html
+- Case studies: https://amiraliyaghouti.com/case-studies.html
+- GitHub profile: https://github.com/shiny-a2
