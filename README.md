@@ -4,7 +4,7 @@ Public showcase of a security-first identity foundation designed for a high-traf
 
 ## Current milestone
 
-Version 0.2.0 marks the first privately reviewed implementation foundation. The approved architecture now has a testable, versioned codebase, while runtime activation remains deliberately disabled.
+Version 0.3.0 adds the reviewed domain model: the state machines that decide whether a one-time code is accepted, and the failure handling that keeps an interrupted worker from locking a customer out of their own sign-in. Runtime activation remains deliberately disabled.
 
 No database schema has been applied, no customer data has been processed, and no staging or Production behavior has changed.
 
@@ -15,6 +15,28 @@ No database schema has been applied, no customer data has been processed, and no
 - Explicit fail-closed boundaries for future integrations
 - Repeatable packaging, quality checks, and privacy safeguards
 - Clear approval gates before migration, pilot, or deployment
+- Immutable challenge and rate-limit state machines covered by adversarial tests
+- Time-bounded work handoffs that survive a worker failing mid-verification
+
+## Designing for the worker that never comes back
+
+Distributed sign-in flows tend to be specified for success and for rejection, and left undefined for interruption. Two such gaps were closed here.
+
+An exclusive claim on a verification attempt had no deadline. If the process holding it stopped, the claim stayed set, and every later attempt was told that verification was already in progress — the customer locked out of their own sign-in until the code expired, with an attempt already spent. Claims are now leased: past the deadline the holder is presumed gone and the attempt is reclaimable.
+
+The state between a correct code and an issued session had no exit at all. An interruption there left the record held indefinitely, and because that state is not terminal it kept retaining what it was protecting. It now has a recovery path that fails it closed.
+
+Recovery deliberately never returns a spent attempt. Refunding one would make every induced stall a free guess, so an interruption costs the customer one attempt rather than handing an attacker an unbounded budget. A worker that outlives its lease is refused before it can act on a decision it no longer has the authority to apply.
+
+## What we learned about guards
+
+A guard is only worth what the evidence that it still bites is worth. Two findings in this milestone came from testing the tests rather than the code.
+
+A scanning scope that reported a clean tree turned out to be exempting a whole file rather than the known-safe pattern inside it. It looked correct until a deliberately planted credential went unreported.
+
+A pipeline-integrity check compared a file digest before evaluating its structural rules. Every one of its bypass cases therefore stopped at the digest and returned before a rule was reached, so the suite demonstrated only that editing a file changes its hash. Separating the two exposed rules that had never been exercised, several of which did not hold.
+
+Both are now enforced the other way round: the scope and the pipeline rules are checked by tests that fail unless a planted problem is actually reported.
 
 ## What the architecture improves
 
@@ -48,6 +70,9 @@ flowchart LR
 - The private foundation remains unavailable if its reviewed runtime boundary cannot be verified.
 - Repeatable checks cover compatibility, packaging integrity, dependency health, and accidental private-data disclosure.
 - The distributable foundation is separated from development and verification tooling.
+- Audit records are validated as a whole rather than field by field, so an entry whose parts are each valid but jointly impossible is refused when it is created. During an incident a plausible but wrong reason is worse than a missing one.
+- Operational detail in those records is drawn from a closed vocabulary rather than free text, because a free-form field will eventually be handed something that identifies a person.
+- Dependency review runs on a schedule as well as on change, since an advisory published after the last change would otherwise go unreported until the next one.
 
 ## Approved delivery safeguards
 
@@ -60,6 +85,7 @@ The approved architecture requires encrypted identity storage, abuse controls, r
 | Read-only audit | Complete |
 | Architecture and security contracts | Complete |
 | Private implementation foundation | Complete; deliberately non-operational |
+| Reviewed domain model and failure handling | Complete; deliberately non-operational |
 | Isolated staging preparation | Approved; no deployment performed |
 | Migration and pilot validation | Pending separate approvals |
 | Production | Not started |
