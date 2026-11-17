@@ -4,9 +4,9 @@ Public showcase of a security-first identity foundation designed for a high-traf
 
 ## Current milestone
 
-Version 0.3.0 adds the reviewed domain model: the state machines that decide whether a one-time code is accepted, and the failure handling that keeps an interrupted worker from locking a customer out of their own sign-in. Runtime activation remains deliberately disabled.
+Version 0.3.1 supports returning customers in the installed private chat integration. After a customer verifies their number, the same conversation can access that customer's account across inactivity and restarts. Signing out, changing the linked number or losing a unique account match ends the connection. The separate browser identity foundation remains in its reviewed, disabled state.
 
-No database schema has been applied, no customer data has been processed, and no staging or Production behavior has changed.
+The installed integration rejected a request for private information without verification. Isolated tests exercised chat continuity, revocation and access boundaries using synthetic accounts.
 
 ## What this milestone delivers
 
@@ -78,7 +78,7 @@ flowchart LR
 
 The approved architecture requires encrypted identity storage, abuse controls, request idempotency, concurrency safety, session revocation, privacy-safe observability, secure recovery, and performance protection before runtime activation. Those operational controls remain subject to separate migration, staging, pilot, and Production approvals.
 
-## Delivery status
+## Browser foundation delivery status
 
 | Stage | Status |
 |---|---|
@@ -88,7 +88,7 @@ The approved architecture requires encrypted identity storage, abuse controls, r
 | Reviewed domain model and failure handling | Complete; deliberately non-operational |
 | Isolated staging preparation | Approved; no deployment performed |
 | Migration and pilot validation | Pending separate approvals |
-| Production | Not started |
+| Browser production activation | Pending |
 
 The private repository contains the reviewed implementation and verification history. Production source, credentials, customer data, infrastructure identifiers, and sensitive security details are intentionally excluded from this showcase.
 
