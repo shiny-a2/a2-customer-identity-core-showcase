@@ -4,6 +4,10 @@
 
 No changes yet.
 
+## [0.3.1] - 2026-11-18
+
+Installed support for verification that survives inactivity and service restarts in the same private conversation. A customer can end the connection or switch numbers. Separate conversations have independent access. Post-installation checks confirmed the running component version and rejection of an unverified private request.
+
 ## [0.3.0] - 2026-08-05
 
 ### Added
