@@ -4,9 +4,11 @@ Public showcase of a security-first identity foundation designed for a high-traf
 
 ## Current milestone
 
-Version 0.3.1 supports returning customers in the installed private chat integration. After a customer verifies their number, the same conversation can access that customer's account across inactivity and restarts. Signing out, changing the linked number or losing a unique account match ends the connection. The separate browser identity foundation remains in its reviewed, disabled state.
+Version 0.3.2 supports returning customers in the installed private chat integration. After a customer verifies their number, the same conversation can access that customer's account across inactivity and restarts. Signing out, changing the linked number or losing a unique account match ends the connection. The separate browser identity foundation remains in its reviewed, disabled state.
 
 The installed integration rejected a request for private information without verification. Isolated tests exercised chat continuity, revocation and access boundaries using synthetic accounts.
+
+The business inbox verifier binds a customer to a single operator account and private conversation. Tests covered a different customer, a different business account and a different channel.
 
 ## What this milestone delivers
 

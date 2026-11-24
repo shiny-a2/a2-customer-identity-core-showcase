@@ -26,7 +26,7 @@ APPROVED_PATHS = frozenset(
 )
 PUBLIC_DOCUMENTS = frozenset({"CHANGELOG.md", "README.md", "VERSION"})
 MAX_FILE_BYTES = 256 * 1024
-EXPECTED_VERSION = "0.3.1"
+EXPECTED_VERSION = "0.3.2"
 EXPECTED_CHECKOUT = "actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0"
 
 SECRET_PATTERNS: Tuple[Tuple[str, re.Pattern[bytes]], ...] = (

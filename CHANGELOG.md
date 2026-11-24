@@ -4,6 +4,10 @@
 
 No changes yet.
 
+## [0.3.2] - 2026-11-24
+
+The business inbox can verify a customer in a specific private conversation. Tests checked that a second business account, a different customer and another messaging channel could not reuse the proof. The release passed the runtime and channel suites on two PHP versions.
+
 ## [0.3.1] - 2026-11-18
 
 Installed support for verification that survives inactivity and service restarts in the same private conversation. A customer can end the connection or switch numbers. Separate conversations have independent access. Post-installation checks confirmed the running component version and rejection of an unverified private request.
